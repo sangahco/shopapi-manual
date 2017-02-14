@@ -68,7 +68,7 @@ HTTPリクエストの例
 
 `CLIENT0001`というコードでクライアントのライセンスを1つリクエストします
 
-..code-block:: bash
+.. code-block:: bash
 
     $ curl \
     --data "client_code=CLIENT0001&product=ezpert" \
@@ -85,11 +85,11 @@ HTTPリクエストの例
     http://ezpert.com/shop/api/license/create.action
 
 
-.. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
+.. note::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
-.. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
-下記ののウェブサイトで利用可能です。:
-   
+.. note:: ** .NET **ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
+下記ののウェブサイトで利用可能です。
+
    * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
