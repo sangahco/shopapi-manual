@@ -1,45 +1,45 @@
-License Revoke Request
-=========================
+ライセンスキャンセルリクエスト
+=============
 
-In case of revoke of contract or refund on the store is possible to revoke the key sending the following request,
-After the request is processed the information related to that license might be deleted or invalidated.
+顧客が契約の取り消し、または払い戻しの場合には、以下のリクエストを送るキーを取り消すことができます。
+リクエストが処理された後、そのライセンスに関連する情報は削除、または無効化される可能性があります。
 
-Web Service URL
+WebサービスのURL
 -------------------
 
-Send a POST request to the following URL:
+POSTリクエストを次のURLに送信します。
 
-**/shop/api/license/revoke.action**
+** / shop / api / license / revoke.action **
 
 
 
-Service Authentication
+サービス認証
 ------------------------
 
-To access the service the user need to be authenticated.
+サービスにアクセスするには、ユーザー認証する必要があります。
 
-The request must be sent using the following header field::
+要求は次のヘッダーフィールドを使用して送信する必要があります::
 
-	Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-The Authorization field is constructed as follows:
+権限フィールドは、以下のように構成されます。
 
-- The username and password are combined with a single colon.
-- The resulting string is encoded using Base64.
-- The authorization method and a space i.e. "Basic " is then put before the encoded string.
+- ユーザ名とパスワードは、1つのコロンで結合されます。
+- 結果の文字列は、Base64を使用してエンコードされます。
+- 認証方法とスペース、すなわち「Basic 」が符号化された文字列の前に置かれる。
 
-.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
-   ``Aladdin`` + ``:`` + ``open sesame`` 
-   and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
+.. note ::パスワード `` open sesame``を持つユーザ `` Aladdin``の場合、結合された文字列は次のようになります：
+   ``Aladdin `` + ``： `` + ``オープンゴマ ``
+   Base64を使ってエンコードすると、結果は `` QWxhZGRpbjpvcGVuIHNlc2FtZQ == ``になります。
 
 
-An example of request header with Token Authentication:
+トークン認証を使用したリクエストヘッダーの例：
 
 .. code-block:: none
     :linenos:
     :emphasize-lines: 5
 
-    POST /ezpert/api/license/create.action HTTP/1.1
+    POST /ezpert/api/license/create.action HTTP/1.1
     ...
     Origin: http://localhost:8003
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
@@ -47,26 +47,25 @@ An example of request header with Token Authentication:
     Content-Type: application/x-www-form-urlencoded
     Referer: http://localhost:8003/acx/index.jsp
     ...
-
 ---------------
 
 
 
 
-Required Request Parameters
+必要なリクエストパラメータ
 ------------------------------
 
 client_code
-    The unique identifier for the client requesting a new license, this identifier is saved together with license and other information for Ezpert Login process.
+    新しいライセンスを要求するクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
-license
-    The license key to revoke
+ライセンス
+    取り消すライセンスキー
 
 
-HTTP Request Examples
-^^^^^^^^^^^^^^^^^^^^^^^^^
+HTTPリクエストの例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request one license for the client with code `CLIENT0001`
+`CLIENT0001`というコードでクライアントのライセンスを1つリクエストします
 
 .. code-block:: bash
 
@@ -76,24 +75,24 @@ Request one license for the client with code `CLIENT0001`
     http://ezpert.com/shop/api/license/revoke.action
 
 
-.. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
+.. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用する環境合わせて確認する必要があります。
 
-.. note:: For **.NET** users, reference and examples about sending requests through .NET applications 
-   are availables at the following websites: 
-   
-   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
+.. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介して要求を送信する際の参照と、
+下記ののウェブサイトで利用可能です：
+   
+   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
-Response Type
+リスポンスタイプ
 ---------------
 
-JSON Output
-^^^^^^^^^^^^^^
+JSON出力
+^^^^^^^^^^^^^^^^^
 
-If the response is in ``json`` the result might be similar to the response below:
+リスポンスが `` json``の場合、結果は以下の応答と似ているものが出ると思います：
 
 .. code-block:: json
 
@@ -103,10 +102,11 @@ If the response is in ``json`` the result might be similar to the response below
         "status": "REVOKED"
     }
 
-XML Output
-^^^^^^^^^^^^^
 
-If the response is in ``xml`` the result will be similar to the sample below:
+XML出力
+^^^^^^^^^^^^^^^
+
+リスポンスが `` xml``の場合、結果は以下のサンプルと似ていると思います：
 
 .. code-block:: xml
 
@@ -120,10 +120,11 @@ If the response is in ``xml`` the result will be similar to the sample below:
     </Response>
 
 
-Error Responses
+
+エラーリスポンス
 ---------------------
 
-In case the authentication credentials have not been sent::
+認証資格情報が送信されていない場合::
 
     {
         "error": {
@@ -131,7 +132,8 @@ In case the authentication credentials have not been sent::
         }
     }
 
-In case the credentials are not valid the authentication will fail with the following response::
+
+認証情報が有効でない場合、認証は次のリスポンスになり、失敗します。
 
     {
         "error": {
