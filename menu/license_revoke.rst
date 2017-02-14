@@ -22,16 +22,15 @@ POSTリクエストを次のURLに送信します。
 
 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-権限フィールドは、以下のように構成されます。
+権限フィールドは、以下のように構成されます:
 
 - ユーザ名とパスワードは、1つのコロンで結合されます。
 - 結果の文字列は、Base64を使用してエンコードされます。
 - 認証方法とスペース、すなわち「Basic 」が符号化された文字列の前に置かれる。
 
-.. note ::パスワード `` open sesame``を持つユーザ `` Aladdin``の場合、結合された文字列は次のようになります：
-   ``Aladdin `` + ``： `` + ``オープンゴマ ``
-   Base64を使ってエンコードすると、結果は `` QWxhZGRpbjpvcGVuIHNlc2FtZQ == ``になります。
-
+.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
+   ``Aladdin`` + ``:`` + ``open sesame`` 
+    and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
 
 トークン認証を使用したリクエストヘッダーの例：
 
@@ -39,7 +38,7 @@ Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
     :linenos:
     :emphasize-lines: 5
 
-    POST /ezpert/api/license/create.action HTTP/1.1
+    POST /ezpert/api/license/create.action HTTP/1.1
     ...
     Origin: http://localhost:8003
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
@@ -47,6 +46,7 @@ Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
     Content-Type: application/x-www-form-urlencoded
     Referer: http://localhost:8003/acx/index.jsp
     ...
+
 ---------------
 
 
@@ -77,9 +77,9 @@ HTTPリクエストの例
 
 .. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用する環境合わせて確認する必要があります。
 
-.. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介して要求を送信する際の参照と、
-下記ののウェブサイトで利用可能です：
-   
+.. note :: **.NET**ユーザーの場合、.NETアプリケーションを介して要求を送信する際の参照と、
+   下記ののウェブサイトで利用可能です：
+
    * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
@@ -133,7 +133,7 @@ XML出力
     }
 
 
-認証情報が有効でない場合、認証は次のリスポンスになり、失敗します。
+認証情報が有効でない場合、認証は次のリスポンスになり、失敗します。::
 
     {
         "error": {
