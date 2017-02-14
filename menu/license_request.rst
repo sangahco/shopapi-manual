@@ -1,36 +1,36 @@
-New License Request
-======================
+新しいライセンスキーのリクエスト
+==========
 
-Web Service URL
+WebサービスのURL
 -------------------
 
-Send a POST request to the following URL:
+POSTリクエストを次のURLに送信します。
 
-**/shop/api/license/create.action**
+** / shop / api / license / create.action **
 
 
 
-Service Authentication
+サービス認証
 ------------------------
 
-To access the service the user need to be authenticated.
+サービスにアクセスするには、ユーザー認証する必要があります。
 
-The request must be sent using the following header field::
+リクエストは次のヘッダーフィールドを使用して送信する必要があります::
 
-	Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Authorization：Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ ==
 
-The Authorization field is constructed as follows:
+権限フィールドは、下記のように構成されます。
 
-- The username and password are combined with a single colon.
-- The resulting string is encoded using Base64.
-- The authorization method and a space i.e. "Basic " is then put before the encoded string.
+- ユーザ名とパスワードは、1つのコロンで結合されます。
+- 結果の文字列は、Base64を使用してエンコードされます。
+- Authorization方法とスペース、すなわち「Basic」が符号化された文字列の前に置かれる。
 
-.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
-   ``Aladdin`` + ``:`` + ``open sesame`` 
-   and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
+.. note ::パスワード `` open sesame``を持つユーザ `` Aladdin``の場合、結合された文字列は次のようになります：
+   ``Aladdin `` + ``： `` + ``オープンゴマ ``
+   Base64を使ってエンコードすると、結果は `` QWxhZGRpbjpvcGVuIHNlc2FtZQ == ``になります。
 
 
-An example of request header with Token Authentication:
+トークン認証を使用したリクエストヘッダーの例：
 
 .. code-block:: none
     :linenos:
@@ -50,32 +50,32 @@ An example of request header with Token Authentication:
 
 
 
-Required Request Parameters
+必要なリクエストパラメータ
 ------------------------------
 
 client_code
-    The unique identifier for the client requesting a new license, this identifier is saved together with license and other information for Ezpert Login process.
+    新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
-product_code
-    The product code in this case is `ezpert`
+製品コード
+    この場合のプロダクトコードは `ezpert`です
 
-license (default: 1)
-    The number of licenses to generate
+ライセンス（デフォルトは1）
+    生成するライセンスの数
 
 
-HTTP Request Examples
-^^^^^^^^^^^^^^^^^^^^^^^^^
+HTTPリクエストの例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request one license for the client with code `CLIENT0001`
+`CLIENT0001`というコードでクライアントのライセンスを1つリクエストします
 
-.. code-block:: bash
+..code-block:: bash
 
-    $ curl \
+    $ curl \
     --data "client_code=CLIENT0001&product=ezpert" \
     --user username:password \
     http://ezpert.com/shop/api/license/create.action
 
-Request two licenses for a client:
+クライアントに対して2つのライセンスをリクエストする：
 
 .. code-block:: bash
 
@@ -85,24 +85,24 @@ Request two licenses for a client:
     http://ezpert.com/shop/api/license/create.action
 
 
-.. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
+.. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
-.. note:: For **.NET** users, reference and examples about sending requests through .NET applications 
-   are availables at the following websites: 
-   
-   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
+.. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
+下記ののウェブサイトで利用可能です。：
+   
+   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
-Response Type
+リスポンスタイプ
 ---------------
 
-JSON Output
-^^^^^^^^^^^^^^
+JSON出力
+^^^^^^^^^^^^^^^^^
 
-If the response is in ``json`` the result might be similar to the response below for one license:
+リスポンスが `` json``である場合、結果は1つのライセンスに対して下記のコードと同じようなものが出ると思います。：
 
 .. code-block:: json
 
@@ -111,7 +111,7 @@ If the response is in ``json`` the result might be similar to the response below
         "license": ["ACTR-9QGO-BNCC-JWM0"]
     }
 
-For two or more licenses:
+2つ以上のライセンスの場合：
 
 .. code-block:: json
 
@@ -121,10 +121,10 @@ For two or more licenses:
     }
 
 
-XML Output
-^^^^^^^^^^^^^
+XML出力
+^^^^^^^^^^^^^^^
 
-If the response is in ``xml`` the result will be similar to the sample below:
+リスポンスが `` xml``の場合、結果は下記のサンプルと似ています：
 
 .. code-block:: xml
 
@@ -138,22 +138,22 @@ If the response is in ``xml`` the result will be similar to the sample below:
     </Response>
 
 
-Error Responses
+エラーリスポンス
 ---------------------
 
-In case the authentication credentials have not been sent::
+認証資格情報が送信されていない場合::
 
-    {
-        "error": {
-            "message": "Unauthorized operation."
-        }
-    }
+    {
+        "error"：{
+            "message": "Unauthorized operation."
+        }
+    }
 
-In case the credentials are not valid the authentication will fail with the following response::
+認証情報が有効ではない場合、認証は次の応答で失敗になります。
 
-    {
-        "error": {
-            "type": "org.springframework.security.BadCredentialsException",
-            "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
-        }
-    }
+    {
+        "error"：{
+            "type"： "org.springframework.security.BadCredentialsException"、
+            "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
+        }
+    }
