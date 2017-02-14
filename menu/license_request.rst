@@ -17,7 +17,7 @@ POSTリクエストを次のURLに送信します。
 
 リクエストは次のヘッダーフィールドを使用して送信する必要があります::
 
-Authorization：Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ ==
+Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ ==
 
 権限フィールドは、下記のように構成されます。
 
@@ -25,12 +25,12 @@ Authorization：Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ ==
 - 結果の文字列は、Base64を使用してエンコードされます。
 - Authorization方法とスペース、すなわち「Basic」が符号化された文字列の前に置かれる。
 
-.. note ::パスワード `` open sesame``を持つユーザ `` Aladdin``の場合、結合された文字列は次のようになります：
-   ``Aladdin `` + ``： `` + ``オープンゴマ ``
-   Base64を使ってエンコードすると、結果は `` QWxhZGRpbjpvcGVuIHNlc2FtZQ == ``になります。
+.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
+   ``Aladdin`` + ``:`` + ``open sesame`` 
+   and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
 
 
-トークン認証を使用したリクエストヘッダーの例：
+トークン認証を使用したリクエストヘッダーの例:
 
 .. code-block:: none
     :linenos:
@@ -75,7 +75,7 @@ HTTPリクエストの例
     --user username:password \
     http://ezpert.com/shop/api/license/create.action
 
-クライアントに対して2つのライセンスをリクエストする：
+クライアントに対して2つのライセンスをリクエストする
 
 .. code-block:: bash
 
@@ -88,7 +88,7 @@ HTTPリクエストの例
 .. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
 .. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
-下記ののウェブサイトで利用可能です。：
+下記ののウェブサイトで利用可能です。:
    
    * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
@@ -102,7 +102,7 @@ HTTPリクエストの例
 JSON出力
 ^^^^^^^^^^^^^^^^^
 
-リスポンスが `` json``である場合、結果は1つのライセンスに対して下記のコードと同じようなものが出ると思います。：
+リスポンスが `` json``である場合、結果は1つのライセンスに対して下記のコードと同じようなものが出ると思います。:
 
 .. code-block:: json
 
@@ -111,7 +111,7 @@ JSON出力
         "license": ["ACTR-9QGO-BNCC-JWM0"]
     }
 
-2つ以上のライセンスの場合：
+2つ以上のライセンスの場合:
 
 .. code-block:: json
 
@@ -124,7 +124,7 @@ JSON出力
 XML出力
 ^^^^^^^^^^^^^^^
 
-リスポンスが `` xml``の場合、結果は下記のサンプルと似ています：
+リスポンスが `` xml``の場合、結果は下記のサンプルと似ています:
 
 .. code-block:: xml
 
@@ -144,16 +144,16 @@ XML出力
 認証資格情報が送信されていない場合::
 
     {
-        "error"：{
+        "error":{
             "message": "Unauthorized operation."
         }
     }
 
-認証情報が有効ではない場合、認証は次の応答で失敗になります。
+認証情報が有効ではない場合、認証は次の応答で失敗になります::
 
     {
-        "error"：{
-            "type"： "org.springframework.security.BadCredentialsException"、
+        "error":{
+            "type": "org.springframework.security.BadCredentialsException"、
             "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
         }
     }
