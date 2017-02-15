@@ -25,9 +25,7 @@ POSTリクエストを次のURLに送信します。
 - 結果の文字列は、Base64を使用してエンコードされます。
 - Authorization方法とスペース、すなわち「Basic」が符号化された文字列の前に置かれる。
 
-.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
-   ``Aladdin`` + ``:`` + ``open sesame`` 
-   and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
+.. note:: パスワードを開いたゴマを持つユーザ ``Aladdin`` の場合、 ``Aladdin`` + ``:`` + ``open sesame`` となり、Base64を使用してエンコードされ	   ます。結果は ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==`` になります。
 
 
 トークン認証を使用したリクエストヘッダーの例:
@@ -54,13 +52,13 @@ POSTリクエストを次のURLに送信します。
 ------------------------------
 
 client_code
-    新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
+	新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
 product_code
-    今回の場合、プロダクトコードは `ezpert` です
-
-license（デフォルトは1）
-    生成するライセンスの数
+	今回の場合、プロダクトコードは `ezpert` です。
+	
+license (default: 1)
+	生成するライセンスの数
 
 
 HTTPリクエストの例
@@ -70,7 +68,7 @@ HTTPリクエストの例
 
 .. code-block:: bash
 
-    $ curl \
+    $ curl \
     --data "client_code=CLIENT0001&product=ezpert" \
     --user username:password \
     http://ezpert.com/shop/api/license/create.action
@@ -85,7 +83,7 @@ HTTPリクエストの例
     http://ezpert.com/shop/api/license/create.action
 
 
-.. note:: 上記のサンプルはlinuxで `` curl`` コマンドを利用していますので、使用環境に合わせて試す必要があります。
+.. note:: 上記のサンプルはlinuxで ``curl`` コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
 .. note:: **.NET** ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
    下記ののウェブサイトで利用可能です:
@@ -124,7 +122,7 @@ JSON出力
 XML出力
 ^^^^^^^^^^^^^^^
 
-リスポンスが `` xml``の場合、結果は下記のサンプルと似ています:
+リスポンスが ``xml``の場合、結果は下記のサンプルと似ています:
 
 .. code-block:: xml
 
