@@ -1,5 +1,5 @@
 新しいライセンスキーのリクエスト
-==========
+===================================
 
 WebサービスのURL
 -------------------
@@ -17,7 +17,7 @@ POSTリクエストを次のURLに送信します。
 
 リクエストは次のヘッダーフィールドを使用して送信する必要があります::
 
-Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ ==
+	Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 権限フィールドは、下記のように構成されます。
 
@@ -57,7 +57,7 @@ client_code
     新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
 製品コード
-    この場合のプロダクトコードは `ezpert`です
+    この場合のプロダクトコードは `ezpert` です
 
 ライセンス（デフォルトは1）
     生成するライセンスの数
@@ -66,7 +66,7 @@ client_code
 HTTPリクエストの例
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`CLIENT0001`というコードでクライアントのライセンスを1つリクエストします
+`CLIENT0001` というコードでクライアントのライセンスを1つリクエストします
 
 ..code-block:: bash
 
@@ -85,10 +85,10 @@ HTTPリクエストの例
     http://ezpert.com/shop/api/license/create.action
 
 
-.. note ::上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
+.. note:: 上記のサンプルはlinuxで `` curl``コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
-.. note :: ** .NET **ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
-下記ののウェブサイトで利用可能です。:
+.. note:: **.NET** ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
+          下記ののウェブサイトで利用可能です。:
    
    * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
@@ -97,7 +97,7 @@ HTTPリクエストの例
    * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
 リスポンスタイプ
----------------
+-------------------
 
 JSON出力
 ^^^^^^^^^^^^^^^^^
@@ -143,17 +143,17 @@ XML出力
 
 認証資格情報が送信されていない場合::
 
-    {
-        "error":{
-            "message": "Unauthorized operation."
-        }
-    }
+    {
+        "error": {
+            "message": "Unauthorized operation."
+        }
+    }
 
 認証情報が有効ではない場合、認証は次の応答で失敗になります::
 
-    {
-        "error":{
-            "type": "org.springframework.security.BadCredentialsException"、
-            "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
-        }
-    }
+    {
+        "error": {
+            "type": "org.springframework.security.BadCredentialsException",
+            "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
+        }
+    }
