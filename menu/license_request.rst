@@ -88,13 +88,13 @@ HTTPリクエストの例
 .. note:: 上記のサンプルはlinuxで `` curl`` コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
 .. note:: **.NET** ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
-          下記ののウェブサイトで利用可能です。:
-   
-   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
-   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
+   下記ののウェブサイトで利用可能です:
+   
+   * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers(v=vs.110).aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
+   * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
 リスポンスタイプ
 -------------------
