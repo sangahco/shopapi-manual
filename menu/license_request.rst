@@ -52,13 +52,19 @@ POSTリクエストを次のURLに送信します。
 ------------------------------
 
 client_code
-	新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
+    新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
 product_code
-	今回の場合、プロダクトコードは `ezpert` です。
-	
+    今回の場合、プロダクトコードは `ezpert` です。
+
+client_name
+    The name of the client.
+
+client_mail
+    An email address that will be used to send the license to the user.
+
 license (default: 1)
-	生成するライセンスの数
+    生成するライセンスの数
 
 
 HTTPリクエストの例
