@@ -56,11 +56,17 @@ Required Request Parameters
 client_code
     The unique identifier for the client requesting a new license, this identifier is saved together with license and other information for Ezpert Login process.
 
+client_name
+    The name of the client.
+
+client_mail
+    An email address that will be used to send the license to the user.
+
 product_code
-    The product code in this case is `ezpert`
+    The product code in this case is `ezpert`.
 
 license (default: 1)
-    The number of licenses to generate
+    The number of licenses to generate.
 
 
 HTTP Request Examples
@@ -71,7 +77,7 @@ Request one license for the client with code `CLIENT0001`
 .. code-block:: bash
 
     $ curl \
-    --data "client_code=CLIENT0001&product=ezpert" \
+    --data "client_code=CLIENT0001&client_name=Mario%20Rossi&client_mail=mario.rossi%40gmail.com&product=ezpert" \
     --user username:password \
     http://ezpert.com/shop/api/license/create.action
 
@@ -80,7 +86,7 @@ Request two licenses for a client:
 .. code-block:: bash
 
     $ curl \
-    --data "client_code=CLIENT0001&product=ezpert&license=2" \
+    --data "client_code=CLIENT0001&client_name=Mario%20Rossi&client_mail=mario.rossi%40gmail.com&product=ezpert&license=2" \
     --user username:password \
     http://ezpert.com/shop/api/license/create.action
 
