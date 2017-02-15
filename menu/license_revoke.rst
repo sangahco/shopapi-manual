@@ -28,9 +28,7 @@ POSTリクエストを次のURLに送信します。
 - 結果の文字列は、Base64を使用してエンコードされます。
 - 認証方法とスペース、すなわち「Basic」が符号化された文字列の前に置かれる。
 
-.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
-   ``Aladdin`` + ``:`` + ``open sesame`` 
-    and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
+.. note:: パスワードを開いたゴマを持つユーザ ``Aladdin`` の場合、 ``Aladdin`` + ``:`` + ``open sesame`` となり、Base64を使用してエンコードされ	   ます。結果は ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==`` になります。
 
 トークン認証を使用したリクエストヘッダーの例:
 
@@ -56,10 +54,10 @@ POSTリクエストを次のURLに送信します。
 ----------------------------
 
 client_code
-    新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
+   新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
 
 license
-    取り消すライセンスキー
+   取り消すライセンスキー
 
 
 HTTPリクエストの例
