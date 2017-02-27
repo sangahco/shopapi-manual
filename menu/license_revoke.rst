@@ -39,7 +39,7 @@ An example of request header with Token Authentication:
     :linenos:
     :emphasize-lines: 5
 
-    POST /ezpert/api/license/create.action HTTP/1.1
+    POST /shop/api/ezpert/RevokeLicense.action HTTP/1.1
     ...
     Origin: http://localhost:8003
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
