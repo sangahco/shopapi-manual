@@ -142,6 +142,7 @@ In case the authentication credentials have not been sent::
         }
     }
 
+
 In case the credentials are not valid the authentication will fail with the following response::
 
    {
