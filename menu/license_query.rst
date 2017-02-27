@@ -1,15 +1,12 @@
-Revoke License
-=========================
-
-In case of revoke of contract or refund on the store is possible to revoke the key sending the following request,
-After the request is processed the information related to that license might be deleted or invalidated.
+Query User Licenses
+===============================
 
 Web Service URL
 -------------------
 
 Send a POST request to the following URL:
 
-**/shop/api/ezpert/RevokeLicense.action**
+**/shop/api/ezpert/QueryLicenses.action**
 
 
 
@@ -39,7 +36,7 @@ An example of request header with Token Authentication:
     :linenos:
     :emphasize-lines: 5
 
-    POST /ezpert/api/license/create.action HTTP/1.1
+    POST /shop/api/ezpert/CreateLicense.action HTTP/1.1
     ...
     Origin: http://localhost:8003
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
@@ -57,24 +54,20 @@ Required Request Parameters
 ------------------------------
 
 client_id
-    The unique identifier for the client, it should be a valid email associated with the license.
-
-license
-    The license key to revoke.
+    It should be a valid email address that will be used as unique identifier for the client and for sending the license to the user.
 
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Revoke a license sending the client id (*mario.rossi@sangah.com*) 
-together with the associated license (*ACTR-9QGO-BNCC-JWM0*):
+Get the licenses purchased by a client sending his ID (*mario.rossi%40sangah.com*):
 
 .. code-block:: bash
 
     $ curl \
-    --data "client_id=mario.rossi%40sangah.com&license=ACTR-9QGO-BNCC-JWM0" \
+    --data "client_id=mario.rossi%40sangah.com" \
     --user username:password \
-    http://ezpert.com/shop/api/ezpert/RevokeLicense.action
+    http://ezpert.com/shop/api/ezpert/QueryLicenses.action
 
 
 .. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
@@ -94,22 +87,35 @@ Response Type
 JSON Output
 ^^^^^^^^^^^^^^
 
-If the response is in ``json`` the result might be similar to the response below:
+If the response is in ``json`` the result might be similar to the response below for one license:
 
 .. code-block:: json
 
-    {
+   {
         "result": {
             "data": [{
                 "client_id": "mario.rossi@sangah.com",
-                "license_key": "HHZF-JWDP-QPG0-COVS-DXKL-8WAA",
+                "license_key": "ZWSO-E4TC-HS0H-QTQD-BTFK-WWAA",
                 "mac_address": null,
                 "product_code": "EZP5",
-                "status": "REVOKED"
+                "status": "NEW"
+            }, {
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "AUQ8-DHR4-VKSD-JPEY-WSFV-8AAA",
+                "mac_address": "08-00-27-AA-6H-7N",
+                "product_code": "EZP5",
+                "status": "ATTACHED"
+            }, {
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "PDKY-J3SO-N5M7-1IEM-TEFY-CQAA",
+                "mac_address": null,
+                "product_code": "EZP5",
+                "status": "NEW"
             }],
-            "status": "REVOKED"
+            "status": "OK"
         }
     }
+
 
 XML Output
 ^^^^^^^^^^^^^
@@ -120,21 +126,31 @@ If the response is in ``xml`` the result will be similar to the sample below:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
-        <Status>REVOKED</Status>
-        <Data class="License-array">
+        <Status>OK</Status>
+        <Data>
             <License>
                 <ClientId>mario.rossi@sangah.com</ClientId>
                 <ProductCode>EZP5</ProductCode>
-                <LicenseKey>HHZF-JWDP-QPG0-COVS-DXKL-8WAA</LicenseKey>
-                <Status>REVOKED</Status>
+                <LicenseKey>ZWSO-E4TC-HS0H-QTQD-BTFK-WWAA</LicenseKey>
+                <Status>NEW</Status>
+            </License>
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>AUQ8-DHR4-VKSD-JPEY-WSFV-8AAA</LicenseKey>
+                <Status>NEW</Status>
+            </License>
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>PDKY-J3SO-N5M7-1IEM-TEFY-CQAA</LicenseKey>
+                <Status>NEW</Status>
             </License>
         </Data>
     </Response>
 
-
-Error Responses
+Common Errors
 ---------------------
-
 
 In case the authentication credentials have not been sent::
 
@@ -143,7 +159,6 @@ In case the authentication credentials have not been sent::
             "message": "Unauthorized operation."
         }
     }
-
 
 In case the credentials are not valid the authentication will fail with the following response::
 
@@ -154,12 +169,19 @@ In case the credentials are not valid the authentication will fail with the foll
         }
     }
 
-
-The licence has not been found; the user or the license key might be wrong::
+In case the user or the key doesn't exist the followig response might be generated::
 
     {
-        "error": {
-            "type": "java.lang.IllegalStateException",
-            "message": "License not found."
+        "result": {
+            "data": [],
+            "status": "OK"
         }
     }
+
+or in case of an `xml` response::
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+        <Status>OK</Status>
+        <Data />
+    </Response>

@@ -1,4 +1,4 @@
-New License Request
+Request New License
 ======================
 
 Web Service URL
@@ -6,7 +6,7 @@ Web Service URL
 
 Send a POST request to the following URL:
 
-**/shop/api/license/create.action**
+**/shop/api/ezpert/CreateLicense.action**
 
 
 
@@ -36,7 +36,7 @@ An example of request header with Token Authentication:
     :linenos:
     :emphasize-lines: 5
 
-    POST /ezpert/api/license/create.action HTTP/1.1
+    POST /shop/api/ezpert/CreateLicense.action HTTP/1.1
     ...
     Origin: http://localhost:8003
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
@@ -53,42 +53,36 @@ An example of request header with Token Authentication:
 Required Request Parameters
 ------------------------------
 
-client_code
-    The unique identifier for the client requesting a new license, this identifier is saved together with license and other information for Ezpert Login process.
+client_id
+    It should be a valid email address that will be used as unique identifier for the client and for sending the license to the user.
 
 client_name
     The name of the client.
 
-client_mail
-    An email address that will be used to send the license to the user.
-
-product_code
-    The product code in this case is `ezpert`.
-
-license (default: 1)
+licenses (default: 1)
     The number of licenses to generate.
 
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request one license for the client with code `CLIENT0001`
+Request one license for a client sending his name (*Mario Rossi*) and his ID (*mario.rossi@gmail.com*):
 
 .. code-block:: bash
 
     $ curl \
-    --data "client_code=CLIENT0001&client_name=Mario%20Rossi&client_mail=mario.rossi%40gmail.com&product=ezpert" \
+    --data "client_name=Mario%20Rossi&client_id=mario.rossi%40gmail.com" \
     --user username:password \
-    http://ezpert.com/shop/api/license/create.action
+    http://ezpert.com/shop/api/ezpert/CreateLicense.action
 
-Request two licenses for a client:
+Same as above but this time we request two license:
 
 .. code-block:: bash
 
     $ curl \
-    --data "client_code=CLIENT0001&client_name=Mario%20Rossi&client_mail=mario.rossi%40gmail.com&product=ezpert&license=2" \
+    --data "client_name=Mario%20Rossi&client_id=mario.rossi%40gmail.com&licenses=2" \
     --user username:password \
-    http://ezpert.com/shop/api/license/create.action
+    http://ezpert.com/shop/api/ezpert/CreateLicense.action
 
 
 .. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
@@ -113,8 +107,17 @@ If the response is in ``json`` the result might be similar to the response below
 .. code-block:: json
 
     {
-        "client_code": "CLIENT0001",
-        "license": ["ACTR-9QGO-BNCC-JWM0"]
+        "response": {
+            "data": [{
+                "mac_address": null,
+                "status": "NEW",
+                "product_code": "EZP5",
+                "license_key": "BB8N-9XFB-JAM6-AL7C-RORI-RAAA",
+                "client_id": "emanuele.disco@sangah.com",
+                "reg_date": "2017-02-27 16:14:48"
+            }],
+            "status": "CREATED"
+        }
     }
 
 For two or more licenses:
@@ -122,8 +125,24 @@ For two or more licenses:
 .. code-block:: json
 
     {
-        "client_code": "CLIENT0001",
-        "license": ["ACTR-9QGO-BNCC-JWM0", "9AAI-CJKJ-PIDF-HKJ3"]
+        "response": {
+            "data": [{
+                "mac_address": null,
+                "status": "NEW",
+                "product_code": "EZP5",
+                "license_key": "LCGQ-VRSM-CLAG-ETGO-FBXL-6WAA",
+                "client_id": "emanuele.disco@sangah.com",
+                "reg_date": "2017-02-27 16:17:06"
+            }, {
+                "mac_address": null,
+                "status": "NEW",
+                "product_code": "EZP5",
+                "license_key": "DCD6-SYBH-EIPX-YIVU-6CEH-MAAA",
+                "client_id": "emanuele.disco@sangah.com",
+                "reg_date": "2017-02-27 16:17:06"
+            }],
+            "status": "CREATED"
+        }
     }
 
 
@@ -136,15 +155,25 @@ If the response is in ``xml`` the result will be similar to the sample below:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
-        <ClientCode>CLIENT0001</ClientCode
-        <Licenses>
-            <License>ACTR-9QGO-BNCC-JWM0</License>
-            <License>9AAI-CJKJ-PIDF-HKJ3</License>
-        <Licenses>
+        <Status>CREATED</Status>
+        <Data class="License-array">
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>HLNY-PSGN-1GZD-NFFF-MIFV-KAAA</LicenseKey>
+                <Status>NEW</Status>
+            </License>
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>B7RM-KWNC-3AYC-LJFA-4TPO-KQAA</LicenseKey>
+                <Status>NEW</Status>
+            </License>
+        </Data>
     </Response>
 
 
-Error Responses
+Common Errors
 ---------------------
 
 In case the authentication credentials have not been sent::
@@ -161,5 +190,15 @@ In case the credentials are not valid the authentication will fail with the foll
         "error": {
             "type": "org.springframework.security.BadCredentialsException",
             "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
+        }
+    }
+
+
+Client Id has not been sent with the request::
+
+    {
+        "error": {
+            "type": "java.lang.NullPointerException",
+            "message": "A client_id must be provided."
         }
     }
