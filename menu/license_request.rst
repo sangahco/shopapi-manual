@@ -1,36 +1,35 @@
-Request New License
-======================
+新しいライセンスキーのリクエスト
+===============================
 
-Web Service URL
+WebサービスのURL
 -------------------
 
-Send a POST request to the following URL:
+POSTリクエストを次のURLに送信します。:
 
 **/shop/api/ezpert/CreateLicense.action**
 
 
 
-Service Authentication
+サービス認証
 ------------------------
 
-To access the service the user need to be authenticated.
+サービスにアクセスするには、ユーザー認証を行う必要があります。
 
-The request must be sent using the following header field::
+リクエストは次のヘッダーフィールドを使用して送信する必要があります::
 
 	Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-The Authorization field is constructed as follows:
+権限フィールドは、下記のように構成されます。
 
-- The username and password are combined with a single colon.
-- The resulting string is encoded using Base64.
-- The authorization method and a space i.e. "Basic " is then put before the encoded string.
+- ユーザ名とパスワードは、1つのコロンで結合されます。
+- 結果の文字列は、Base64を使用してエンコードされます。
+- Authorization方法とスペース、すなわち「Basic」が符号化された文字列の前に置かれる。
 
-.. note:: For a user ``Aladdin`` having password ``open sesame`` the combined string would be:
-   ``Aladdin`` + ``:`` + ``open sesame`` 
-   and then encoded using Base64 the result will be ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==``.
+.. note:: パスワードを開いたゴマを持つユーザ ``Aladdin`` の場合、 
+   ``Aladdin`` + ``:`` + ``open sesame`` となり、
+   Base64を使用してエンコードされ   ます。結果は ``QWxhZGRpbjpvcGVuIHNlc2FtZQ==`` になります。
 
-
-An example of request header with Token Authentication:
+トークン認証を使用したリクエストヘッダーの例:
 
 .. code-block:: none
     :linenos:
@@ -50,7 +49,7 @@ An example of request header with Token Authentication:
 
 
 
-Required Request Parameters
+必要なリクエストパラメータ
 ------------------------------
 
 client_id
@@ -60,10 +59,10 @@ client_name
     The name of the client.
 
 licenses (default: 1)
-    The number of licenses to generate.
+    生成するライセンスの数
 
 
-HTTP Request Examples
+HTTPリクエストの例
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Request one license for a client sending his name (*Mario Rossi*) and his ID (*mario.rossi@gmail.com*):
@@ -85,10 +84,10 @@ Same as above but this time we request two license:
     http://ezpert.com/shop/api/ezpert/CreateLicense.action
 
 
-.. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
+.. note:: 上記のサンプルはlinuxで ``curl`` コマンドを利用していますので、使用環境に合わせて試す必要があります。
 
-.. note:: For **.NET** users, reference and examples about sending requests through .NET applications 
-   are availables at the following websites: 
+.. note:: **.NET** ユーザーの場合、.NETアプリケーションを介してリクエストを送信する際の参照と
+   下記ののウェブサイトで利用可能です: 
    
    * https://msdn.microsoft.com/en-us/library/debx8sh9(v=vs.110).aspx
    * https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest(v=vs.110).aspx
@@ -96,8 +95,8 @@ Same as above but this time we request two license:
    * https://msdn.microsoft.com/en-us/library/system.web.httprequest.inputstream.aspx
    * https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
-Response Type
----------------
+リスポンスタイプ
+-------------------
 
 JSON Output
 ^^^^^^^^^^^^^^
