@@ -9,7 +9,7 @@ WebサービスのURL
 
 POSTリクエストを次のURLに送信します。
 
-**/shop/api/license/revoke.action**
+**/shop/api/ezpert/RevokeLicense.action**
 
 
 
@@ -53,24 +53,25 @@ POSTリクエストを次のURLに送信します。
 必要なリクエストパラメータ
 ----------------------------
 
-client_code
-   新しいライセンスをリクエストするクライアントの識別子。この識別子は、Ezpertログインプロセスのライセンスおよびその他の情報とともに保存されます。
+client_id
+    The unique identifier for the client, it should be a valid email associated with the license.
 
 license
-   取り消すライセンスキー
+    The license key to revoke.
 
 
 HTTPリクエストの例
 ^^^^^^^^^^^^^^^^^^^^^
 
-`CLIENT0001` というコードでクライアントのライセンスを1つリクエストします
+Revoke a license sending the client id (*mario.rossi@sangah.com*) 
+together with the associated license (*ACTR-9QGO-BNCC-JWM0*):
 
 .. code-block:: bash
 
     $ curl \
-    --data "client_code=CLIENT0001&license=ACTR-9QGO-BNCC-JWM0" \
+    --data "client_id=mario.rossi%40sangah.com&license=ACTR-9QGO-BNCC-JWM0" \
     --user username:password \
-    http://ezpert.com/shop/api/license/revoke.action
+    http://ezpert.com/shop/api/ezpert/RevokeLicense.action
 
 
 .. note:: 上記のサンプルはlinuxで ``curl`` コマンドを利用していますので、使用する環境合わせて確認する必要があります。
@@ -95,9 +96,16 @@ JSON出力
 .. code-block:: json
 
     {
-        "client_code": "CLIENT0001",
-        "license": ["ACTR-9QGO-BNCC-JWM0"]
-        "status": "REVOKED"
+        "result": {
+            "data": [{
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "HHZF-JWDP-QPG0-COVS-DXKL-8WAA",
+                "mac_address": null,
+                "product_code": "EZP5",
+                "status": "REVOKED"
+            }],
+            "status": "REVOKED"
+        }
     }
 
 
@@ -110,11 +118,15 @@ XML出力
 
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
-        <ClientCode>CLIENT0001</ClientCode
-        <Licenses>
-            <License>ACTR-9QGO-BNCC-JWM0</License>
-        <Licenses>
         <Status>REVOKED</Status>
+        <Data class="License-array">
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>HHZF-JWDP-QPG0-COVS-DXKL-8WAA</LicenseKey>
+                <Status>REVOKED</Status>
+            </License>
+        </Data>
     </Response>
 
 
@@ -122,7 +134,7 @@ XML出力
 エラーリスポンス
 ------------------
 
-認証資格情報が送信されていない場合::
+In case the authentication credentials have not been sent::
 
    {
         "error": {
@@ -130,11 +142,21 @@ XML出力
         }
     }
 
-認証情報が有効でない場合、認証は次のリスポンスとなり、失敗します。::
+In case the credentials are not valid the authentication will fail with the following response::
 
    {
         "error": {
             "type": "org.springframework.security.BadCredentialsException",
             "message": "Login failed - username or password incorrect; nested exception is java.lang.RuntimeException: Login failed - username or password incorrect"
+        }
+    }
+
+
+The licence has not been found; the user or the license key might be wrong::
+
+    {
+        "error": {
+            "type": "java.lang.IllegalStateException",
+            "message": "License not found."
         }
     }

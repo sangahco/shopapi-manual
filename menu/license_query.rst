@@ -1,12 +1,12 @@
-Request New License
-======================
+Query User Licenses
+===============================
 
 Web Service URL
 -------------------
 
 Send a POST request to the following URL:
 
-**/shop/api/ezpert/CreateLicense.action**
+**/shop/api/ezpert/QueryLicenses.action**
 
 
 
@@ -56,33 +56,18 @@ Required Request Parameters
 client_id
     It should be a valid email address that will be used as unique identifier for the client and for sending the license to the user.
 
-client_name
-    The name of the client.
-
-licenses (default: 1)
-    The number of licenses to generate.
-
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request one license for a client sending his name (*Mario Rossi*) and his ID (*mario.rossi@gmail.com*):
+Get the licenses purchased by a client sending his ID (*mario.rossi%40sangah.com*):
 
 .. code-block:: bash
 
     $ curl \
-    --data "client_name=Mario%20Rossi&client_id=mario.rossi%40gmail.com" \
+    --data "client_id=mario.rossi%40sangah.com" \
     --user username:password \
-    http://ezpert.com/shop/api/ezpert/CreateLicense.action
-
-Same as above but this time we request two license:
-
-.. code-block:: bash
-
-    $ curl \
-    --data "client_name=Mario%20Rossi&client_id=mario.rossi%40gmail.com&licenses=2" \
-    --user username:password \
-    http://ezpert.com/shop/api/ezpert/CreateLicense.action
+    http://ezpert.com/shop/api/ezpert/QueryLicenses.action
 
 
 .. note:: The samples above make use of ``curl`` command on linux, and they should be translated according to the language you want to use.
@@ -106,42 +91,28 @@ If the response is in ``json`` the result might be similar to the response below
 
 .. code-block:: json
 
-    {
-        "response": {
+   {
+        "result": {
             "data": [{
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "ZWSO-E4TC-HS0H-QTQD-BTFK-WWAA",
                 "mac_address": null,
-                "status": "NEW",
                 "product_code": "EZP5",
-                "license_key": "BB8N-9XFB-JAM6-AL7C-RORI-RAAA",
-                "client_id": "emanuele.disco@sangah.com",
-                "reg_date": "2017-02-27 16:14:48"
-            }],
-            "status": "CREATED"
-        }
-    }
-
-For two or more licenses:
-
-.. code-block:: json
-
-    {
-        "response": {
-            "data": [{
-                "mac_address": null,
-                "status": "NEW",
-                "product_code": "EZP5",
-                "license_key": "LCGQ-VRSM-CLAG-ETGO-FBXL-6WAA",
-                "client_id": "emanuele.disco@sangah.com",
-                "reg_date": "2017-02-27 16:17:06"
+                "status": "NEW"
             }, {
-                "mac_address": null,
-                "status": "NEW",
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "AUQ8-DHR4-VKSD-JPEY-WSFV-8AAA",
+                "mac_address": "08-00-27-AA-6H-7N",
                 "product_code": "EZP5",
-                "license_key": "DCD6-SYBH-EIPX-YIVU-6CEH-MAAA",
-                "client_id": "emanuele.disco@sangah.com",
-                "reg_date": "2017-02-27 16:17:06"
+                "status": "ATTACHED"
+            }, {
+                "client_id": "mario.rossi@sangah.com",
+                "license_key": "PDKY-J3SO-N5M7-1IEM-TEFY-CQAA",
+                "mac_address": null,
+                "product_code": "EZP5",
+                "status": "NEW"
             }],
-            "status": "CREATED"
+            "status": "OK"
         }
     }
 
@@ -155,23 +126,28 @@ If the response is in ``xml`` the result will be similar to the sample below:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
-        <Status>CREATED</Status>
-        <Data class="License-array">
+        <Status>OK</Status>
+        <Data>
             <License>
                 <ClientId>mario.rossi@sangah.com</ClientId>
                 <ProductCode>EZP5</ProductCode>
-                <LicenseKey>HLNY-PSGN-1GZD-NFFF-MIFV-KAAA</LicenseKey>
+                <LicenseKey>ZWSO-E4TC-HS0H-QTQD-BTFK-WWAA</LicenseKey>
                 <Status>NEW</Status>
             </License>
             <License>
                 <ClientId>mario.rossi@sangah.com</ClientId>
                 <ProductCode>EZP5</ProductCode>
-                <LicenseKey>B7RM-KWNC-3AYC-LJFA-4TPO-KQAA</LicenseKey>
+                <LicenseKey>AUQ8-DHR4-VKSD-JPEY-WSFV-8AAA</LicenseKey>
+                <Status>NEW</Status>
+            </License>
+            <License>
+                <ClientId>mario.rossi@sangah.com</ClientId>
+                <ProductCode>EZP5</ProductCode>
+                <LicenseKey>PDKY-J3SO-N5M7-1IEM-TEFY-CQAA</LicenseKey>
                 <Status>NEW</Status>
             </License>
         </Data>
     </Response>
-
 
 Common Errors
 ---------------------
@@ -193,12 +169,19 @@ In case the credentials are not valid the authentication will fail with the foll
         }
     }
 
-
-Client Id has not been sent with the request::
+In case the user or the key doesn't exist the followig response might be generated::
 
     {
-        "error": {
-            "type": "java.lang.NullPointerException",
-            "message": "A client_id must be provided."
+        "result": {
+            "data": [],
+            "status": "OK"
         }
     }
+
+or in case of an `xml` response::
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+        <Status>OK</Status>
+        <Data />
+    </Response>
