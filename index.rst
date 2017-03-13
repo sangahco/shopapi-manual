@@ -11,3 +11,5 @@ SangAh License Manager API
    :glob:
    
    menu/*
+
+.. note:: Test the API service: `demo <https://shopapi.kspmis.com/shop>`_

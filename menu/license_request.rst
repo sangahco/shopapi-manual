@@ -61,6 +61,9 @@ client_name
 licenses (default: 1)
     生成するライセンスの数
 
+output (default: ``json``)
+    The type of response can be ``json`` or ``xml``.
+
 
 HTTPリクエストの例
 ^^^^^^^^^^^^^^^^^^^^^^^^^
