@@ -62,6 +62,9 @@ client_name
 licenses (default: 1)
     The number of licenses to generate.
 
+output (default: ``json``)
+    The type of response can be ``json`` or ``xml``.
+
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^

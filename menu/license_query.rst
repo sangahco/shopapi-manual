@@ -56,6 +56,8 @@ Required Request Parameters
 client_id
     It should be a valid email address that will be used as unique identifier for the client and for sending the license to the user.
 
+output (default: ``json``)
+    The type of response can be ``json`` or ``xml``.
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^

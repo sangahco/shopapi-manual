@@ -62,6 +62,8 @@ client_id
 license
     The license key to revoke.
 
+output (default: ``json``)
+    The type of response can be ``json`` or ``xml``.
 
 HTTP Request Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^
